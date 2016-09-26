@@ -13,56 +13,62 @@ class ReportReader(object):
     # Can get some ideas of how to read files in directory from here: https://github.com/jekyc/wig/blob/master/wig/classes/cache.py
     #
     # Usage:
-    #
-    # from response import ReportReader
-    #
-    # reportreader = ReportReader()
-    #
-    # path_to_reports = input("Where is the path to the reports directory for dirsearch usually it is located at ~/dirsearch/reports. ")
-    # list_of_dirs = []
-    # list_of_dirs = reportreader.get_directory_list(path_to_reports)
-    #
-    #
-    #
-    def get_directory_list(path):
+
+
+
+#    from response import ReportReader
+
+#    reportreader = ReportReader()
+
+#    path_to_reports = input("Where is the path to the reports directory for dirsearch usually it is located at ~/dirsearch/reports. ")
+#    list_of_dirs = []
+#    list_of_dirs = reportreader.get_directory_list(path_to_reports)
+
+#    list_of_files = []
+#
+
+
+
+
+
+
+
+    def get_directory_list(self,path):
         # path = "/home/timo/diresearch/reports"
         #
-        dirlist = []
+        dir_list = []
 
         for f in os.listdir(path):
 
         # Maybe append dir name to path so you will have full path ?
-            dirlist.append(f)
+            dir_list.append(f)
 
 
 
-        return dirlist
-
-
-
-
-    def get_file_list(directory):
-
-        # Get list of files in directory so we can read the contents of each.
+        return dir_list
 
 
 
 
+    def get_file_list(self):
+
+        file_list = []
+
+        current_dir = os.getcwd()
 
 
-class CheckResponses(object):
+        for f in os.listdir(current_dir):
 
 
-    def find_junk_responses():
-        # Look for 10 or more
-        # response 200's with the same response size
+            file_list.append(f)
+
+        return file_list
+
+
+
+
+
+    def open_file(self,filename):
+        # Do Stuff
         #
-
-    # Stuff Related to Logging dirsearch to sqlite
-    #
-    #
-    def discard_junk_responses():
-
-    def setup_tables(self, conn):
-
-        cur = conn.cursor()
+        print ("We will open the file here")
