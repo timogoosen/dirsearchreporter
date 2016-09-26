@@ -50,14 +50,12 @@ class ReportReader(object):
 
 
 
-    def get_file_list(self):
+    def get_file_list(self,path):
 
         file_list = []
 
-        current_dir = os.getcwd()
 
-
-        for f in os.listdir(current_dir):
+        for f in os.listdir(path):
 
 
             file_list.append(f)
