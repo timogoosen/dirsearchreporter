@@ -41,7 +41,13 @@ class ReportReader(object):
         for f in os.listdir(path):
 
         # Maybe append dir name to path so you will have full path ?
-            dir_list.append(f)
+            dir_path = path  + '/' +f
+            is_dir = os.path.isdir(dir_path)
+
+            if is_dir:
+
+
+                dir_list.append(f)
 
 
 
@@ -57,8 +63,16 @@ class ReportReader(object):
 
         for f in os.listdir(path):
 
+            file_path = path + '/' +f
 
-            file_list.append(f)
+            is_file = os.path.isfile(file_path)
+
+            if is_file:
+
+
+                file_list.append(f)
+
+
 
         return file_list
 
