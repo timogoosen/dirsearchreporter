@@ -39,10 +39,16 @@ for f in list_of_dirs:
 
         #Get Length of array so we can loop over it
         file_length = len(filerows_first)
-        #print(file_length)
+    #    file_length_second = len(filerows_second)
+    #    file_length_third = len(filerows_third)
+
+        #print(file_length_first,file_length_second,file_length_third)
+
+
+
         for a in range(1,file_length):
             content_size = filerows_first[a]
             request_url = filerows_second[a]
-            status_code = filerows_third[a]
+            status_code = filerows_third[a-1]
 
-            print(content_size,request_url,statuscode)
+            print(content_size,request_url,status_code)
