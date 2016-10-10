@@ -5,6 +5,7 @@ import sqlite3
 import os
 
 
+
 class ReportReader(object):
 
     # This is almost the inverse of this: https://github.com/maurosoria/dirsearch/blob/master/lib/reports/BaseReport.py
@@ -80,7 +81,26 @@ class ReportReader(object):
 
 
 
-    def open_file(self,filename):
-        # Do Stuff
-        #
-        print ("We will open the file here")
+    def read_and_print(filename):
+
+        with open(filename,'r') as fd:
+            a = ''
+            for line in fd.readlines():
+                a = a + line
+
+            return a
+
+    def do_other_stuff(line):
+        for f in line.split():
+            print(f)
+
+
+    def loop_over_first(line):
+    # Split lines so we can count how many entries we have
+        split_lines = line.split()
+    # Get length of split entries so like "404 30kb http://url.com" should have lengg
+    th of 3
+        fileRows = []
+        line_length = len(split_lines)
+        for f in range(1,line_length,3):
+            print(split_lines[f])
