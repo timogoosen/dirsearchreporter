@@ -102,7 +102,10 @@ class ReportReader(object):
         fileRows = []
         line_length = len(split_lines)
         for f in range(1,line_length,3):
-            print(split_lines[f])
+            #print(split_lines[f])
+            fileRows.append(split_lines[f])
+
+        return fileRows
 
 
 
@@ -113,7 +116,10 @@ class ReportReader(object):
         fileRows = []
         line_length = len(split_lines)
         for f in range(2,line_length,3):
-            print(split_lines[f])
+            #print(split_lines[f])
+            fileRows.append(split_lines[f])
+
+        return fileRows
 
 
 
@@ -125,4 +131,7 @@ class ReportReader(object):
         fileRows = []
         line_length = len(split_lines)
         for f in range(3,line_length,3):
-            print(split_lines[f])
+            #print(split_lines[f])
+            fileRows.append(split_lines[f])
+
+        return fileRows

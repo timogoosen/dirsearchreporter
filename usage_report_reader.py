@@ -28,13 +28,21 @@ for f in list_of_dirs:
         file_path_for_file = dir_path + "/" + i
         #print(file_path_for_file)
         filehandle = reportreader.read_and_print(file_path_for_file)
-        reportreader.loop_over_first(filehandle)
-    #print (file_list)
-    # This works fine unless there is a file between all the directories in the reports/ directory.
-    # Need to have a check to see if something is a file or directory.
+        filerows_first = []
+        filerows_second = []
+        filerows_third = []
+
+        filerows_first = reportreader.loop_over_first(filehandle)
+        filerows_second = reportreader.loop_over_second(filehandle)
+        filerows_third = reportreader.loop_over_third(filehandle)
 
 
+        #Get Length of array so we can loop over it
+        file_length = len(filerows_first)
+        #print(file_length)
+        for a in range(1,file_length):
+            content_size = filerows_first[a]
+            request_url = filerows_second[a]
+            status_code = filerows_third[a]
 
-
-
-#list_of_files = []
+            print(content_size,request_url,statuscode)
