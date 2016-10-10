@@ -26,7 +26,9 @@ for f in list_of_dirs:
 
     for i in file_list:
         file_path_for_file = dir_path + "/" + i
-        print(file_path_for_file)
+        #print(file_path_for_file)
+        filehandle = reportreader.read_and_print(file_path_for_file)
+        reportreader.loop_over_first(filehandle)
     #print (file_list)
     # This works fine unless there is a file between all the directories in the reports/ directory.
     # Need to have a check to see if something is a file or directory.

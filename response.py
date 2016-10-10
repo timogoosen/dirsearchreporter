@@ -81,7 +81,7 @@ class ReportReader(object):
 
 
 
-    def read_and_print(filename):
+    def read_and_print(self,filename):
 
         with open(filename,'r') as fd:
             a = ''
@@ -90,17 +90,39 @@ class ReportReader(object):
 
             return a
 
-    def do_other_stuff(line):
+    def do_other_stuff(self,line):
         for f in line.split():
             print(f)
 
 
-    def loop_over_first(line):
+    def loop_over_first(self,line):
     # Split lines so we can count how many entries we have
         split_lines = line.split()
-    # Get length of split entries so like "404 30kb http://url.com" should have lengg
-    th of 3
+    # Get length of split entries so like "404 30kb http://url.com" should have length of 3
         fileRows = []
         line_length = len(split_lines)
         for f in range(1,line_length,3):
+            print(split_lines[f])
+
+
+
+
+    def loop_over_second(self,line):
+    # Split lines so we can count how many entries we have
+        split_lines = line.split()
+        fileRows = []
+        line_length = len(split_lines)
+        for f in range(2,line_length,3):
+            print(split_lines[f])
+
+
+
+
+
+    def loop_over_third(self,line):
+    # Split lines so we can count how many entries we have
+        split_lines = line.split()
+        fileRows = []
+        line_length = len(split_lines)
+        for f in range(3,line_length,3):
             print(split_lines[f])
