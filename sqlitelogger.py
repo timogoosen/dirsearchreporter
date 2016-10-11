@@ -97,13 +97,27 @@ class SQLiteLogger(object):
 
         # Does value exist in StatusCode table yet?
 
-        # Insert into statement
+        # Check if file exists so we can update request count
+        # select exists(select file from File where file='http://www.splashplastic.com:80/lib');
+        cur.execute(
+            '''select exists(select file from File where file=? and statuscode=?)''', ( file,int(statuscode) ) )
+        exists = cur.fetchone()[0]
+
+        if exists:
+            print ("file already exists increment requestcount for file")
+
+
+        # Now Update requestcount just look at above code
+            cur.execute(
+                '''UPDATE File set requestcount = requestcount+1 WHERE file = ? and statuscode=?''', ( file,int(statuscode) ) )
+
+
 
         # INSERT Into File(id,file,requestcount,contentlength,statuscode)
         # VALUES(4,"/server-status.php","1","3432","404");
-
-        cur.execute('''INSERT OR IGNORE INTO FILE (file,requestcount,contentlength,statuscode)
-                VALUES (?, ?, ?, ? )''', (  file, int(requestcount), int(contentlength), int(statuscode)) )
+        else:
+            cur.execute('''INSERT OR IGNORE INTO FILE (file,requestcount,contentlength,statuscode)
+                    VALUES (?, ?, ?, ? )''', (  file, int(requestcount), int(contentlength), int(statuscode)) )
 
         # Remember to commit
 
