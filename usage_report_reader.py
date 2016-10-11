@@ -2,6 +2,20 @@
 
 from response import ReportReader
 import os
+from sqlitelogger import SQLiteLogger
+import sqlite3
+
+
+# Some things to be able to log to sqlite
+logger = SQLiteLogger()
+
+database = "challenge.sqlite"
+
+conn = logger.connection(database)
+logger.setup_tables(conn)
+
+
+# To be able to use methods to parse and process data
 
 reportreader = ReportReader()
 
@@ -47,8 +61,24 @@ for f in list_of_dirs:
 
 
         for a in range(1,file_length):
-            content_size = filerows_first[a]
+
+            # Strip the B from for example 292B of content size so it
+            # will be 292 instead. Thus we can better work with the values as int in sqlite
+
+
+            # content_size = convert_to_byte(content_Size_string)
+
+            content_size = reportreader.convert_to_byte(filerows_first[a])
+            #a = a[:-1]
+
+
+
             request_url = filerows_second[a]
             status_code = filerows_third[a-1]
 
-            print(content_size,request_url,status_code)
+            #print(content_size,request_url,status_code)
+            logger.load_statuscode_table(status_code, conn)
+            logger.load_file_table(request_url, 1, content_size, status_code, conn)
+
+# Close database only after all files rusults have been imported
+logger.close_conection(conn)

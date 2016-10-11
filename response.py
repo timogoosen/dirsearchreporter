@@ -90,9 +90,8 @@ class ReportReader(object):
 
             return a
 
-    def do_other_stuff(self,line):
-        for f in line.split():
-            print(f)
+    
+
 
 
     def loop_over_first(self,line):
@@ -108,7 +107,8 @@ class ReportReader(object):
         return fileRows
 
 
-
+# Loop over third entry in the dirsearch log file
+# which is the full url which includes the file that was found e.g https://site.com/install.php
 
     def loop_over_second(self,line):
     # Split lines so we can count how many entries we have
@@ -135,3 +135,40 @@ class ReportReader(object):
             fileRows.append(split_lines[f])
 
         return fileRows
+
+
+
+# Validate and convert
+#
+# convert to byte value in int
+# so from 10KB to 10000
+#
+# or from 200B to 200B
+#
+# content_size = convert_to_byte(content_Size_string)
+#
+
+
+    def convert_to_byte(self,content_size_string):
+
+        mb_suffix = "MB"
+        kb_suffix = "KB"
+        b_suffix = "B"
+
+        if (content_size_string.endswith(mb_suffix)):
+                # Convert to int and strip MB at end of string
+                # a = a[:-1]
+                content_size = int(content_size_string[:-2])
+                # Convert to byte by multiplying by 1000000
+                return content_size*1000000
+
+
+        elif (content_size_string.endswith(kb_suffix)):
+
+            content_size = int(content_size_string[:-2])
+
+            return content_size*1000
+
+
+        elif (content_size_string.endswith(b_suffix)):
+            return int(content_size_string[:-1])

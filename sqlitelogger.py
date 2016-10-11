@@ -87,6 +87,8 @@ class SQLiteLogger(object):
         # If it exists then we update the count.
 
     # Load File  inserting into file table.
+    #
+    # We need some methods to validate data especially the content size
 
     def load_file_table(self, file, requestcount, contentlength, statuscode, conn):
         cur = conn.cursor()
