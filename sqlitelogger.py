@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+# -*- coding: utf-8 -*-
 
 import sqlite3
 
@@ -9,17 +9,10 @@ class SQLiteLogger(object):
     # Stuff Related to Logging dirsearch to sqlite
 
     def setup_tables(self, conn):
-
         cur = conn.cursor()
-    # The count we can work out by doing a select of File.name,id where name =
-    # name.
-
         cur.executescript('''
-
         DROP TABLE IF EXISTS StatusCode;
         DROP TABLE IF EXISTS File;
-
-
         PRAGMA foreign_keys = ON;
 
         CREATE TABLE StatusCode (
@@ -35,9 +28,6 @@ class SQLiteLogger(object):
           statuscode INTEGER,
             FOREIGN KEY(statuscode) REFERENCES StatusCode(code)
         );
-
-
-
 
         ''')
 
@@ -58,8 +48,6 @@ class SQLiteLogger(object):
 
     # Check if statuscode was added before
     # This returns 1 if it exists
-    # select exists(select code from StatusCode where code=404)
-        # Maybe insert or ignore
         cur.execute(
             '''select exists(select code from StatusCode where code=?)''', ( int(statuscode), ) )
         exists = cur.fetchone()[0]
@@ -81,48 +69,23 @@ class SQLiteLogger(object):
 
         # Commit Changes
         conn.commit()
-
-        # INSERT INTO StatusCode(code,codecount) VALUES (500,1);
-
-        # If it exists then we update the count.
-
-    # Load File  inserting into file table.
-    #
     # We need some methods to validate data especially the content size
 
     def load_file_table(self, file, requestcount, contentlength, statuscode, conn):
         cur = conn.cursor()
-
         cur.execute('''PRAGMA foreign_keys = ON''')
-
         # Does value exist in StatusCode table yet?
-
-        # Check if file exists so we can update request count
-        # select exists(select file from File where file='http://www.splashplastic.com:80/lib');
         cur.execute(
             '''select exists(select file from File where file=? and statuscode=?)''', ( file,int(statuscode) ) )
         exists = cur.fetchone()[0]
-
         if exists:
             print ("file already exists increment requestcount for file")
-
-
         # Now Update requestcount just look at above code
             cur.execute(
                 '''UPDATE File set requestcount = requestcount+1 WHERE file = ? and statuscode=?''', ( file,int(statuscode) ) )
-
-
-
-        # INSERT Into File(id,file,requestcount,contentlength,statuscode)
-        # VALUES(4,"/server-status.php","1","3432","404");
         else:
             cur.execute('''INSERT OR IGNORE INTO FILE (file,requestcount,contentlength,statuscode)
                     VALUES (?, ?, ?, ? )''', (  file, int(requestcount), int(contentlength), int(statuscode)) )
 
-        # Remember to commit
 
         conn.commit()
-
-    # Parse CSV
-
-    # Use this baby

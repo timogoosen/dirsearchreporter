@@ -14,6 +14,11 @@ database = "challenge.sqlite"
 conn = logger.connection(database)
 logger.setup_tables(conn)
 
+# Add some ASCII art look at code for SPartan by Senspost on their github
+# for ideas on how to do this.
+
+# Also add method to check that program is being run by python3, if not exit.
+
 
 # To be able to use methods to parse and process data
 
